@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCart from "../components/BlogCart";
 import ProductCard from "../components/ProductCard";
+import SpecialProduct from "../components/SpecialProduct";
 
 const Home = () => {
   return (
@@ -212,7 +213,103 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="marque-wrapper home-wrapper-2 py-5">
+      <section className="home-wrapper-2 py-5 famous-wrapper">
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-01.jpg"
+                  className="img-fluid"
+                  alt="watch"
+                />
+                <div className="famous-content position-absolute">
+                  <h5>Big Screen</h5>
+                  <h6>Smart Watch Series 7</h6>
+                  <p>From &#8372;15 000 or &#8372;625/mo. for 24 mo.*</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-02.jpg"
+                  className="img-fluid"
+                  alt="watch"
+                />
+                <div className="famous-content position-absolute">
+                  <h5 className="text-dark">Studio Display</h5>
+                  <h6 className="text-dark">600 nits of brightness.</h6>
+                  <p className="text-dark">27-inch 5k Retina display</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-03.jpg"
+                  className="img-fluid"
+                  alt="watch"
+                />
+                <div className="famous-content position-absolute">
+                  <h5 className="text-dark">Smartphones</h5>
+                  <h6 className="text-dark">Smartphone 13 Pro.</h6>
+                  <p className="text-dark">
+                    Now in Green, From &#8372;26 000 or &#8372;1083/mo.
+                    Footnode*
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-04.jpg"
+                  className="img-fluid"
+                  alt="watch"
+                />
+                <div className="famous-content position-absolute">
+                  <h5 className="text-dark">Home Speaker</h5>
+                  <h6 className="text-dark">Room-filling sound.</h6>
+                  <p className="text-dark">
+                    From &#8372;15 000 or &#8372;625/mo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="home-wrapper-2 py-5 special-wrapper">
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col-12">
+              <h3 className="section-heading">Special Products</h3>
+            </div>
+          </div>
+          <div className="row">
+            <SpecialProduct />
+            <SpecialProduct />
+            <SpecialProduct />
+          </div>
+        </div>
+      </section>
+      <section className="home-wrapper-2 py-5 popular-wrapper">
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col-12">
+              <h3 className="section-heading">Our Popular Products</h3>
+            </div>
+          </div>
+          <div className="row">
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </div>
+        </div>
+      </section>
+      <section className="home-wrapper-2 py-5 marque-wrapper">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
