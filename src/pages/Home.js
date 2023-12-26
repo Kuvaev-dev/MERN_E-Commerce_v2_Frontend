@@ -291,6 +291,7 @@ const Home = () => {
             <SpecialProduct />
             <SpecialProduct />
             <SpecialProduct />
+            <SpecialProduct />
           </div>
         </div>
       </section>
