@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
-import BlogCart from "../components/BlogCart";
+import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 
@@ -352,10 +352,20 @@ const Home = () => {
             <div className="col-12">
               <h3 className="section-heading">Our Latest Blogs</h3>
             </div>
-            <BlogCart />
-            <BlogCart />
-            <BlogCart />
-            <BlogCart />
+          </div>
+          <div className="row">
+            <div className="col-3">
+              <BlogCard/>
+            </div>
+            <div className="col-3">
+              <BlogCard/>
+            </div>
+            <div className="col-3">
+              <BlogCard/>
+            </div>
+            <div className="col-3">
+              <BlogCard/>
+            </div>
           </div>
         </div>
       </section>
