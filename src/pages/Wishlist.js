@@ -1,6 +1,8 @@
 import React from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
+import cross from "../images/cross.svg";
+import watch from "../images/watch.jpg";
 
 const Wishlist = () => {
   return (
@@ -13,16 +15,12 @@ const Wishlist = () => {
             <div className="col-3">
               <div className="wishlist-card position-relative">
                 <img
-                  src="images/cross.svg"
+                  src={cross}
                   alt="cross"
                   className="position-absolute cross img-fluid"
                 />
                 <div className="wishlist-card-image">
-                  <img
-                    src="images/watch.jpg"
-                    className="img-fluid w-100 "
-                    alt=""
-                  />
+                  <img src={watch} className="img-fluid w-100 " alt="" />
                 </div>
                 <div className="py-3 px-3">
                   <h5 className="title">Some Product</h5>
@@ -33,16 +31,12 @@ const Wishlist = () => {
             <div className="col-3">
               <div className="wishlist-card position-relative">
                 <img
-                  src="images/cross.svg"
+                  src={cross}
                   alt="cross"
                   className="position-absolute cross img-fluid"
                 />
                 <div className="wishlist-card-image">
-                  <img
-                    src="images/watch.jpg"
-                    className="img-fluid w-100 "
-                    alt=""
-                  />
+                  <img src={watch} className="img-fluid w-100 " alt="" />
                 </div>
                 <div className="py-3 px-3">
                   <h5 className="title">Some Product</h5>

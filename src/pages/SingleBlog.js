@@ -3,6 +3,7 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import blog from "../images/blog-1.jpg";
 
 const SingleBlog = () => {
   return (
@@ -15,14 +16,10 @@ const SingleBlog = () => {
             <div className="col-12">
               <div className="single-blog-card">
                 <Link to="/blogs" className="d-flex align-items-center gap-10">
-                  <FaArrowLeft className="fs-4"/> Go Back to Blogs
+                  <FaArrowLeft className="fs-4" /> Go Back to Blogs
                 </Link>
                 <h3 className="title">Something New Was Happened</h3>
-                <img
-                  src="images/blog-1.jpg"
-                  className="img-fluid w-100 my-4"
-                  alt="blog"
-                />
+                <img src={blog} className="img-fluid w-100 my-4" alt="blog" />
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
                   ea, molestiae architecto odio molestias laborum suscipit velit

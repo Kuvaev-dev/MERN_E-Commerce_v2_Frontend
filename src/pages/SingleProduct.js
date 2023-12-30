@@ -16,6 +16,15 @@ const SingleProduct = () => {
     img: "https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100",
   };
   const [orderedProduct, setOrderedProduct] = useState(true);
+  const copyToClipboard = (text) => {
+    console.log("text", text);
+    var textField = document.createElement("textarea");
+    textField.innerText = text;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand("copy");
+    textField.remove();
+  };
   return (
     <>
       <Meta title={"Dynamic Product Name"} />
@@ -81,7 +90,7 @@ const SingleProduct = () => {
                     Write a Review
                   </a>
                 </div>
-                <div className="border-bottom py-3">
+                <div className="py-3">
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Type:</h3>
                     <p className="product-data">Some Type</p>
@@ -158,6 +167,25 @@ const SingleProduct = () => {
                         Add To Wishlist
                       </a>
                     </div>
+                  </div>
+                  <div className="d-flex gap-10 flex-column my-3">
+                    <h3 className="product-heading">Shipping & Returns:</h3>
+                    <p className="product-data">
+                      Some Shipping & <b>Returns Details</b>
+                    </p>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center my-3">
+                    <h3 className="product-heading">Product Link:</h3>
+                    <a
+                      href="javascript:void(0)"
+                      onClick={() => {
+                        copyToClipboard(
+                          "https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100"
+                        );
+                      }}
+                    >
+                      Copy Product Link
+                    </a>
                   </div>
                 </div>
               </div>
