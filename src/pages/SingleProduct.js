@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
@@ -8,13 +8,25 @@ import Color from "../components/Color";
 import { TbGitCompare } from "react-icons/tb";
 import { FaRegHeart } from "react-icons/fa6";
 import Container from "../components/Container";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../features/products/productSlice";
 
 const SingleProduct = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const getProductID = location.pathname.split("/")[2];
+  const productState = useSelector((state) => state.product.singleproduct);
+  useEffect(() => {
+    dispatch(getProduct(getProductID));
+  });
   const props = {
-    width: 400,
+    width: 594,
     height: 600,
     zoomWidth: 600,
-    img: "https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100",
+    img: productState?.images[0]?.url
+      ? productState?.images[0]?.url
+      : "https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100",
   };
   const [orderedProduct, setOrderedProduct] = useState(true);
   const copyToClipboard = (text) => {
@@ -39,48 +51,27 @@ const SingleProduct = () => {
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-15">
-              <div>
-                <img
-                  src="https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  src="https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  src="https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  src="https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
+              {productState?.images.map((item, index) => {
+                return (
+                  <div>
+                    <img src={item?.url} className="img-fluid" alt="" />
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="col-6">
             <div className="main-product-details">
               <div className="border-bottom">
-                <h3 className="title">Some Product</h3>
+                <h3 className="title">{productState?.title}</h3>
               </div>
               <div className="border-bottom py-3">
-                <p className="price">&#8372;100</p>
+                <p className="price">&#8372; {productState?.price}</p>
                 <div className="d-flex align-items-center gap-10">
                   <ReactStars
                     count={5}
                     size={24}
-                    value={3}
+                    value={productState?.totalRating}
                     edit={false}
                     activeColor="#ffd700"
                   />
@@ -97,15 +88,15 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Brand:</h3>
-                  <p className="product-data">Some Brand</p>
+                  <p className="product-data">{productState?.brand}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Category:</h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{productState?.category}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Tags:</h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{productState?.tags}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Avaliability:</h3>
@@ -179,9 +170,7 @@ const SingleProduct = () => {
                   <a
                     href="javascript:void(0)"
                     onClick={() => {
-                      copyToClipboard(
-                        "https://www.bartonwatchbands.com/cdn/shop/articles/Most_popular_luxury_watches.jpg?v=1686944605&width=1100"
-                      );
+                      copyToClipboard(window.location.href);
                     }}
                   >
                     Copy Product Link
@@ -197,12 +186,9 @@ const SingleProduct = () => {
           <div className="col-12">
             <h4>Description</h4>
             <div className="bg-white p-3">
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Impedit mollitia vel atque, omnis ad harum hic alias consequatur
-                sit molestiae rerum voluptatum quia natus velit doloribus, illo
-                cumque debitis id!
-              </p>
+              <p
+                dangerouslySetInnerHTML={{ __html: productState?.description }}
+              ></p>
             </div>
           </div>
         </div>

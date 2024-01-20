@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
-import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import Container from "../components/Container";
 import { services } from "../utils/Data";
@@ -9,20 +8,20 @@ import moment from "moment";
 import { getBlogs } from "../features/blogs/blogSlice";
 import { getProducts } from "../features/products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import wish from "../images/wish.svg";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
-import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist } from "../features/products/productSlice";
 
 const Home = () => {
   const blogState = useSelector((state) => state?.blog?.blog);
   const productState = useSelector((state) => state?.product?.product);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     getAllBlogs();
     getAllProducts();
@@ -213,16 +212,7 @@ const Home = () => {
               if (item.tags === "featured") {
                 return (
                   <div key={index} className="col-3">
-                    <Link
-                      // to={`${
-                      //   location.pathname == "/"
-                      //     ? "/product/:id"
-                      //     : location.pathname == "/product/:id"
-                      //     ? "/product/:id"
-                      //     : ":id"
-                      // }`}
-                      className="product-card position-relative"
-                    >
+                    <div className="product-card position-relative">
                       <div className="wishlist-icon position-absolute">
                         <button
                           className="border-0 bg-transparent"
@@ -259,14 +249,18 @@ const Home = () => {
                             <img src={prodcompare} alt="compare" />
                           </button>
                           <button className="border-0 bg-transparent">
-                            <img src={view} alt="view" />
+                            <img
+                              src={view}
+                              onClick={() => navigate(`/product/${item?._id}`)}
+                              alt="view"
+                            />
                           </button>
                           <button className="border-0 bg-transparent">
                             <img src={addcart} alt="addcart" />
                           </button>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 );
               }
@@ -350,6 +344,7 @@ const Home = () => {
                 return (
                   <SpecialProduct
                     key={index}
+                    id={item?._id}
                     title={item?.title}
                     brand={item?.brand}
                     totalRating={item?.totalRating.toString()}
@@ -374,24 +369,16 @@ const Home = () => {
               if (item.tags === "popular") {
                 return (
                   <div key={index} className="col-3">
-                    <Link
-                      // to={`${
-                      //   location.pathname == "/"
-                      //     ? "/product/:id"
-                      //     : location.pathname == "/product/:id"
-                      //     ? "/product/:id"
-                      //     : ":id"
-                      // }`}
-                      className="product-card position-relative"
-                    >
+                    <div className="product-card position-relative">
                       <div className="wishlist-icon position-absolute">
-                        <button
-                          className="border-0 bg-transparent"
-                          onClick={(e) => {
-                            onAddToWishlist(item?._id);
-                          }}
-                        >
-                          <img src={wish} alt="wishlist" />
+                        <button className="border-0 bg-transparent">
+                          <img
+                            src={wish}
+                            alt="wishlist"
+                            onClick={(e) => {
+                              onAddToWishlist(item?._id);
+                            }}
+                          />
                         </button>
                       </div>
                       <div className="product-image">
@@ -420,14 +407,18 @@ const Home = () => {
                             <img src={prodcompare} alt="compare" />
                           </button>
                           <button className="border-0 bg-transparent">
-                            <img src={view} alt="view" />
+                            <img
+                              src={view}
+                              onClick={() => navigate(`/product/${item?._id}`)}
+                              alt="view"
+                            />
                           </button>
                           <button className="border-0 bg-transparent">
                             <img src={addcart} alt="addcart" />
                           </button>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 );
               }
