@@ -11,8 +11,12 @@ import Container from "../components/Container";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../features/products/productSlice";
+import { toast } from "react-toastify";
+import { addProductToCart } from "../features/user/userSlice";
 
 const SingleProduct = () => {
+  const [color, setColor] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const location = useLocation();
   const dispatch = useDispatch();
   const getProductID = location.pathname.split("/")[2];
@@ -20,6 +24,14 @@ const SingleProduct = () => {
   useEffect(() => {
     dispatch(getProduct(getProductID));
   });
+  const uploadCart = () => {
+    if (color === null) {
+      toast.error("Please Choose Color");
+      return false;
+    } else {
+      dispatch(addProductToCart({productID:productState?._id,quantity,color,price:productState?.price}))
+    }
+  };
   const props = {
     width: 594,
     height: 600,
@@ -121,7 +133,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Color:</h3>
-                  <Color />
+                  <Color setColor={setColor} colorData={productState?.color} />
                 </div>
                 <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                   <h3 className="product-heading">Quantity:</h3>
@@ -134,15 +146,23 @@ const SingleProduct = () => {
                       id=""
                       className="form-control"
                       style={{ width: "70px" }}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      value={quantity}
                     />
                   </div>
                   <div className="d-flex align-items-center gap-30 ms-5">
-                    <button className="button border-0" type="submit">
+                    <button
+                      className="button border-0"
+                      data-bs-toggle="modal"
+                      data-bs-target="#staticBackdrop"
+                      type="submit"
+                      onClick={() => {
+                        uploadCart(productState?._id);
+                      }}
+                    >
                       Add To Cart
                     </button>
-                    <button to="/signup" className="button signup">
-                      Buy It Now
-                    </button>
+                    <button className="button signup">Buy It Now</button>
                   </div>
                 </div>
                 <div className="d-flex align-items-center gap-15">
