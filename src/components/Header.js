@@ -12,6 +12,7 @@ const Header = () => {
   const [total, setTotal] = useState(null);
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state?.auth?.cartProducts);
+  const authState = useSelector((state) => state.auth);
   useEffect(() => {
     let sum = 0;
     for (let index = 0; index < cartState?.length; index++) {
@@ -92,15 +93,23 @@ const Header = () => {
                 </div>
                 <div>
                   <Link
-                    to="/login"
+                    to={authState?.user === null ? "/login" : ""}
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src={user} alt="user" />
-                    <p className="mb-0">
-                      Login
-                      <br />
-                      My Account
-                    </p>
+                    {authState?.user === null ? (
+                      <p className="mb-0">
+                        Login
+                        <br />
+                        My Account
+                      </p>
+                    ) : (
+                      <p className="mb-0">
+                        Welcome
+                        <br />
+                        {authState?.user?.firstname}
+                      </p>
+                    )}
                   </Link>
                 </div>
                 <div>

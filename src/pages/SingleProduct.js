@@ -29,7 +29,7 @@ const SingleProduct = () => {
     dispatch(getUserCart());
   });
   useEffect(() => {
-    for (let index = 0; index < cartState.length; index++) {
+    for (let index = 0; index < cartState?.length; index++) {
       if (getProductID === cartState[index]?.productID?._id) {
         setAlreadyAdded(true);
       }
