@@ -1,5 +1,6 @@
 import axios from "axios";
 import { base_url } from "../../utils/axiosConfig";
+import { config } from "../../utils/axiosConfig";
 
 const register = async (userData) => {
   const response = await axios.post(`${base_url}user/register`, userData);
@@ -75,6 +76,17 @@ const getUserOrders = async () => {
   }
 };
 
+const updateUser = async (data) => {
+  const response = await axios.put(
+    `${base_url}user/edit-user`,
+    data,
+    config
+  );
+  if (response.data) {
+    return response.data;
+  }
+};
+
 export const authService = {
   register,
   login,
@@ -85,4 +97,5 @@ export const authService = {
   updateProductFromCart,
   createOrder,
   getUserOrders,
+  updateUser,
 };

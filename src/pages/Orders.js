@@ -7,7 +7,7 @@ import { getOrders } from "../features/user/userSlice";
 const Orders = () => {
   const dispatch = useDispatch();
   const orderState = useSelector(
-    (state) => state.auth.getOrderedProducts.orders
+    (state) => state?.auth?.getOrderedProducts?.orders
   );
   useEffect(() => {
     dispatch(getOrders());
@@ -37,7 +37,11 @@ const Orders = () => {
             {orderState &&
               orderState.map((item, index) => {
                 return (
-                  <div className="row bg-warning my-3" key={index}>
+                  <div
+                    style={{ backgroundColor: "#febd69" }}
+                    className="row pt-3 my-3"
+                    key={index}
+                  >
                     <div className="col-3">
                       <p>{item?._id}</p>
                     </div>
@@ -51,31 +55,36 @@ const Orders = () => {
                       <p>{item?.orderStatus}</p>
                     </div>
                     <div className="col-12">
-                      <div className="row bg-secondary p-3">
+                      <div
+                        style={{ backgroundColor: "#232f3e" }}
+                        className="row py-3"
+                      >
                         <div className="col-3">
-                          <h5>Product Name</h5>
+                          <h5 className="text-white">Product Name</h5>
                         </div>
                         <div className="col-3">
-                          <h5>Quantity</h5>
+                          <h5 className="text-white">Quantity</h5>
                         </div>
                         <div className="col-3">
-                          <h5>Price</h5>
+                          <h5 className="text-white">Price</h5>
                         </div>
                         <div className="col-3">
-                          <h5>Color</h5>
+                          <h5 className="text-white">Color</h5>
                         </div>
                         {item?.orderedItems?.map((item, index) => {
                           return (
                             <div className="col-12">
-                              <div className="row bg-secondary p-3">
+                              <div className="row p-3">
                                 <div className="col-3">
-                                  <p>{item?.product?.title}</p>
+                                  <p className="text-white">
+                                    {item?.product?.title}
+                                  </p>
                                 </div>
                                 <div className="col-3">
-                                  <p>{item?.quantity}</p>
+                                  <p className="text-white">{item?.quantity}</p>
                                 </div>
                                 <div className="col-3">
-                                  <p>{item?.price}</p>
+                                  <p className="text-white">{item?.price}</p>
                                 </div>
                                 <div className="col-3">
                                   <ul className="colors ps-0">
