@@ -48,9 +48,9 @@ export const addProductToCart = createAsyncThunk(
 
 export const getUserCart = createAsyncThunk(
   "user/cart/get",
-  async (thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      return await authService.getCart();
+      return await authService.getCart(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -170,7 +170,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         if (state.isError === true) {
-          toast.error(action.error);
+          toast.error(action.payload.response.data.message);
         }
       })
       .addCase(loginUser.pending, (state) => {
@@ -192,7 +192,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         if (state.isError === true) {
-          toast.error(action.error);
+          toast.error(action.payload.response.data.message);
         }
       })
       .addCase(getUserProductWishlist.pending, (state) => {
@@ -329,7 +329,18 @@ export const authSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.updatedUser = action.payload;
-        if (state.isSuccess) {
+        if (state.isSuccess === true) {
+          let currentUserData = JSON.parse(localStorage.getItem("customer"));
+          let newUserData = {
+            _id: currentUserData?._id,
+            token: currentUserData.token,
+            firstname: action?.payload?.firstname,
+            lastname: action?.payload?.lastname,
+            email: action?.payload?.email,
+            mobile: action?.payload?.mobile,
+          };
+          localStorage.setItem("customer", JSON.stringify(newUserData));
+          state.user = newUserData;
           toast.success("Profile Updated Successfully");
         }
       })

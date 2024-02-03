@@ -13,12 +13,23 @@ import {
 } from "../features/user/userSlice";
 
 const Cart = () => {
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+      }`,
+      Accept: "application/json",
+    },
+  };
   const [productUpdateDetail, setProductUpdateDetail] = useState(null);
   const [totalAmount, setTotalAmount] = useState(null);
   const dispatch = useDispatch();
   const userCartState = useSelector((state) => state.auth.cartProducts);
   useEffect(() => {
-    dispatch(getUserCart());
+    dispatch(getUserCart(config2));
   }, []);
   useEffect(() => {
     if (productUpdateDetail !== null) {

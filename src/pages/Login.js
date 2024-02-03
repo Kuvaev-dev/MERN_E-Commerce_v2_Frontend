@@ -27,9 +27,13 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
-      navigate("/");
     },
   });
+  useEffect(() => {
+    if (authState.user !== null && authState.isError === false) {
+      navigate("/");
+    }
+  }, [authState]);
   return (
     <>
       <Meta title={"Login"} />
