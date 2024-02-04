@@ -50,10 +50,10 @@ const getCart = async (data) => {
   }
 };
 
-const removeProductFromCart = async (cartItemID) => {
+const removeProductFromCart = async (data) => {
   const response = await axios.delete(
-    `${base_url}user/delete-product-cart/${cartItemID}`,
-    config
+    `${base_url}user/delete-product-cart/${data.id}`,
+    data.config2
   );
   if (response.data) {
     return response.data;

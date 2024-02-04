@@ -40,14 +40,14 @@ const Cart = () => {
         })
       );
       setTimeout(() => {
-        dispatch(getUserCart());
+        dispatch(getUserCart(config2));
       }, 3000);
     }
   }, [productUpdateDetail]);
   const deleteProductFromCart = (id) => {
-    dispatch(deleteCartProduct(id));
+    dispatch(deleteCartProduct({ id: id, config2: config2 }));
     setTimeout(() => {
-      dispatch(getUserCart());
+      dispatch(getUserCart(config2));
     }, 3000);
   };
   useEffect(() => {
@@ -102,15 +102,11 @@ const Cart = () => {
                         <input
                           className="form-control"
                           type="number"
-                          name=""
+                          name={"quantity" + item?.id}
                           min={1}
                           max={10}
-                          id=""
-                          value={
-                            productUpdateDetail?.quantity
-                              ? productUpdateDetail?.quantity
-                              : item?.quantity
-                          }
+                          id={"cart" + item?._id}
+                          value={item?.quantity}
                           onChange={(e) => {
                             setProductUpdateDetail({
                               cartItemID: item?._id,

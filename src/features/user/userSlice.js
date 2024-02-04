@@ -81,9 +81,9 @@ export const getOrders = createAsyncThunk(
 
 export const deleteCartProduct = createAsyncThunk(
   "user/cart/product/delete",
-  async (cartItemID, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      return await authService.removeProductFromCart(cartItemID);
+      return await authService.removeProductFromCart(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
